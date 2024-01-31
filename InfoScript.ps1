@@ -6,11 +6,11 @@ $DeviceName = $env:COMPUTERNAME
 # Username
 $Username = $env:USERNAME
 
-# RAM Memorija
+# RAM Memory
 $RAM = (Get-CimInstance Win32_PhysicalMemory | Measure-Object Capacity -Sum).Sum
 $RAM_GB = [math]::Round($RAM / 1GB, 2)
 
-# HDD Informacije
+# HDD Info
 $HDD = Get-PhysicalDisk | Select-Object Size, MediaType
 $HDD_Info = @()
 foreach ($disk in $HDD) {
@@ -18,8 +18,8 @@ foreach ($disk in $HDD) {
     $HDD_Info += "$($HDD_GB) GB, $($disk.MediaType)"
 }
 
-# Prikaz rezultata
+# Show result
 Write-Host "Device Name: $DeviceName"
 Write-Host "Username: $Username"
 Write-Host "RAM Memory: $RAM_GB GB"
-Write-Host "HDD INFO: $($HDD_Info -join '; ')"
+Write-Host "HDD Info: $($HDD_Info -join '; ')"
